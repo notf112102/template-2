@@ -6,6 +6,34 @@
   --text-color: #a8a8a8;
 }
 /* end variables */
+/* start div-scroll */
+.div-scroll{
+    height: 5px; 
+    position: fixed; 
+    top: 0; 
+    left: 0; 
+    background-color: var(--main-color);
+    z-index: 10000000;
+}
+/* end div-scroll */
+/* start btn-top */
+.btn-top{
+    position: fixed; 
+    right: 10px;
+    bottom: 10px; 
+    background-color: var(--main-color);
+    width: 40px; 
+    height: 40px;
+    border-radius: 50%;
+    z-index: 10000; 
+    color: white; 
+    display: none; 
+    justify-content: center; 
+    align-items: center;
+    font-size: 20px;
+    cursor: pointer;
+}
+/* end btn-top */
 /* start special-header */
 .special-header{
     margin-top: 100px;
@@ -211,9 +239,6 @@ header .container nav div{
 /* end header */
 /* start leading */
 .leading{
-    background-image: url(../images/landing.jpg);
-    background-size: cover;
-    background-repeat: no-repeat;
     height: 100vh;
     position: relative;
 }
@@ -225,6 +250,25 @@ header .container nav div{
     background-color: rgb(0 0 0 / 50%);
     left: 0;
     top: 0;
+}
+.leading .images{
+    width: 100%; 
+    height: 100%; 
+    overflow: hidden; 
+}
+.leading .images-content{
+    display: flex;
+    height: 100%;
+    width: 300%;
+}
+.leading .images-content div{
+    height: 100%; 
+    width: 100%;
+}
+.leading .images .images-content div img{
+    object-fit: cover;
+    width: 100%; 
+    height:100%;
 }
 .leading .txt{
     width: 60%;
@@ -275,6 +319,7 @@ header .container nav div{
     top: 50%;
     transform: translateY(-50%);
     color: white;
+    cursor: pointer;
 }
 .leading i.left{
     left: 10px;
@@ -626,57 +671,133 @@ header .container nav div{
 /* end stats */
 /* start skills */
 .skills{
-    padding-top: 50px; 
+    padding-top:50px; 
     padding-bottom: 50px;
+    position: relative;
 }
-.skills .container{
+.skills .controle{
+    position: absolute;
+    bottom: 10px; 
+    left: 50%; 
+    transform: translateX(-50%);
+    z-index: 2;
     display: flex; 
-    /* justify-content: space-between; */
+    justify-content: space-between;
+    align-items: center;
+    width: 300px;
+}
+@media(max-width:992px){
+    .skills .controle{
+        bottom: 0; 
+        left: 50%; 
+        top: 48.5%;
+        transform: translate(-50%, -50%);
+    }
+}
+.skills .controle div{
+    padding: 5px 10px; 
+    border-radius: 5px; 
+    background-color: var(--main-color);
+    cursor: pointer;
+}
+.skills .controle ul{
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    list-style-type: none;
+}
+.skills .controle ul li a{
+    background-color: #eee;
+    text-decoration: none; 
+    color: black;
+    width: 40px; 
+    height: 40px; 
+    display: flex; 
+    justify-content: center; 
+    align-items: center;
+    transition: 0.3s;
+    cursor: pointer;
+}
+.skills .controle ul li a.active{
+    background-color: var(--main-color);
+}
+.skills .controle ul li:nth-child(2) a{
+    margin: 0 5px;
+}
+.skills .users{
+    overflow: hidden; 
+    width: 100%;
+    scroll-behavior: smooth;
+}
+.skills .user-content{
+    width: 300%; 
+    display: flex;
+}
+.skills .user{
+    width:100%; 
+    padding-left: 20px; 
+    padding-right: 20px;
+    padding-top: 20px;
+}
+.skills .user{
+    display: flex;
     flex-direction: column;
 }
-.skills .container .box{
-    /* flex-basis: 45%; */
+.skills .user .box{
     flex-basis: 100%;
-    margin-bottom: 25px;
 }
-.skills .container .sub-header{
+@media(max-width:767px){
+    .skills .controle{
+        top: 55.6%;
+    }
+    .skills .user .box:first-child{
+        margin-bottom: 40px;
+    }
+}
+@media(max-width:459px){
+    .skills .controle{
+        top: 57.5%;
+    }
+}
+.skills .user .sub-header{
     text-align: center;
 }
-.skills .container .sub-header h3{
+.skills .user .sub-header h3{
     padding: 0; 
     margin: 0 0 20px 0;
     text-transform: uppercase;
     font-weight: 300;
 }
-.skills .container .sub-header p{
+.skills .user .sub-header p{
     padding: 0;
     margin: 0 auto 25px; 
     font-weight: 300;
     color: var(--text-color);
     padding: 5px;
 }
-.skills .container .content{
+.skills .user .content{
     display: flex;
     flex-direction: column;
     margin-bottom: 10px;
     text-align: center;
 }
-.skills .container .content img{
+.skills .user .content img{
     width: 72px;
+    height: 72px;
     border-radius: 50%;
     object-fit: cover;
     margin: 0 auto 0 auto;
 }
-.skills .container .box .content .txt{
+.skills .user .box .content .txt{
     border-bottom: 1px solid var(--text-color);
     padding: 10px 0 10px 0;
 }
-.skills .container .box .content .txt p{
+.skills .user .box .content .txt p{
     font-weight: 200; 
     line-height: 1.6;
     padding: 5px;
 }
-.skills .container .box .content .txt span{
+.skills .user .box .content .txt span{
     text-align: right;
     font-size: 12px;
     display: block; 
@@ -684,39 +805,21 @@ header .container nav div{
     margin-right: auto;
     color: var(--text-color);
 }
-.skills .container ul{
-    list-style-type: none; 
-    margin:10px auto 0 auto; 
-    width: fit-content;
-    padding: 0; 
-    display: flex;
-}
-.skills .container ul li{
-    width: 15px; 
-    height: 15px; 
-    border: 1px solid black; 
-    border-radius: 50%; 
-    margin-right: 2px;
-}
-.skills .container ul li.active{
-    background-color: var(--main-color);
-    border-color: black;
-}
-.skills .container .skill{
+.skills .user .skill{
     margin-bottom:10px;
 }
-.skills .container .skill div{
+.skills .user .skill div{
     width: 100%; 
     height: 30px; 
     background-color: #dedadc;
     position: relative;
 }
-.skills .container .skill h4 {
+.skills .user .skill h4 {
     padding: 0; 
     margin: 0 0 5px 0;
     font-weight: 300;
 }
-.skills .container .skill span{
+.skills .user .skill span{
     height: 100%; 
     display: block; 
     background-color: var(--main-color);
@@ -724,7 +827,7 @@ header .container nav div{
     top: 0; 
     left: 0;
 }
-.skills .container .skill span::before{
+.skills .user .skill span::before{
     content: attr(data-value);
     padding: 5px;
     background-color: black;
@@ -734,7 +837,7 @@ header .container nav div{
     right: -17px;
     font-size: 12px;
 }
-.skills .container .skill span::after{
+.skills .user .skill span::after{
     content: "";
     position: absolute;
     top: -6px;
@@ -744,12 +847,12 @@ header .container nav div{
     border-width: 6px;
 }
 @media(min-width:768px){
-    .skills .container .sub-header p{
+    .skills .user .sub-header p{
         width: 50%;
         line-height: 1.6;
         font-size: 14px;
     }
-    .skills .container .content{
+    .skills .user .content{
         justify-content: space-between;
         align-items: center;
         flex-direction: row;
@@ -757,29 +860,29 @@ header .container nav div{
         width: 75%;
         margin:0 auto 10px;
     }
-    .skills .container .content img{
+    .skills .user .content img{
         margin:0 10px 0 0;
     }
-    .skills .container .skill{
+    .skills .user .skill{
         width: 75%;
         margin:0 auto 10px;
     }
 }
 @media(min-width:992px){
-    .skills .container{
+    .skills .user{
         flex-direction: row;
         justify-content: space-between;
     }
-    .skills .container .sub-header p{
+    .skills .user .sub-header p{
         width: 100%;
         line-height: 1.6;
         font-size: 16px;
         padding: 0;
     }
-    .skills .container .box{
+    .skills .user .box{
         flex-basis: 45%;
     }
-    .skills .container .content{
+    .skills .user .content{
         justify-content: space-between;
         align-items: center;
         flex-direction: row;
@@ -787,13 +890,13 @@ header .container nav div{
         width: 100%;
         margin-bottom:10px;
     }
-    .skills .container .content p{
+    .skills .user .content p{
         padding: 0;
     }
-    .skills .container .content img{
+    .skills .user .content img{
         margin:0 10px 0 0;
     }
-    .skills .container .skill{
+    .skills .user .skill{
         width: 100%;
         margin-bottom:15px;
     }
